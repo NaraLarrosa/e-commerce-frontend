@@ -1,26 +1,26 @@
 import React, { useEffect , useState } from 'react';
 
-import ProductsList from '../components/ProductsList';
+import CategoriesList from '../components/CategoriesList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-const Products = () => {
+const Categories = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [loadedProducts, setLoadedProducts] = useState();
+  const [loadedCategories, setLoadedCategories] = useState();
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchCategories = async () => {
       try {
         const responseData = await sendRequest(
-          'http://localhost:5000/api/product'
+          'http://localhost:5000/api/category'
         );
 
-        setLoadedProducts(responseData.products);
+        setLoadedCategories(responseData.categories);
 
       } catch (err) {}
     };
-    fetchProducts();
+    fetchCategories();
   }, [sendRequest]);
 
   return (
@@ -31,9 +31,9 @@ const Products = () => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedProducts && <ProductsList items={loadedProducts} />}
+      {!isLoading && loadedCategories && <CategoriesList items={loadedCategories} />}
     </React.Fragment>
   );
 };
 
-export default Products;
+export default Categories;
