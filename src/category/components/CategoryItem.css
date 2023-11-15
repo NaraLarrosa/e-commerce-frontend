@@ -4,46 +4,48 @@
   min-width: 17.5rem;
 }
 
-.category-item a {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  padding: 1rem;
-  color: white;
-  background: #292929;
-}
-
-.category-item a:hover,
-.category-item a:active {
-  background: #ffd900;
-}
-
 .category-item__content {
   padding: 0;
 }
 
+.category-item__info {
+  padding: 1rem;
+  text-align: center;
+}
+
 .category-item__image {
-  width: 4rem;
-  height: 4rem;
-  margin-right: 1rem;
+  width: 100%;
+  height: 12.5rem;
+  margin-right: 1.5rem;
 }
 
-.category-item__info h2 {
-  font-size: 1.5rem;
+.category-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-item__info h2,
+.category-item__info h3,
+.category-item__info p {
   margin: 0 0 0.5rem 0;
-  font-weight: normal;
-  color: #ffd900;
 }
 
-.category-item:hover h2,
-.category-item:active h2,
-.category-item:hover h3,
-.category-item:active h3 {
-  color: #292929;
+.category-item__actions {
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #ccc;
 }
 
-.category-item__info h3 {
-  margin: 0;
+.category-item__modal-content {
+  padding: 0;
+}
+
+.category-item__modal-actions {
+  text-align: right;
+}
+
+.category-item__actions button,
+.category-item__actions a {
+  margin: 0.5rem;
 }

@@ -50,13 +50,13 @@ const AddProduct = () => {
   const productSubmitHandler = async event => {
     event.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append('name', formState.inputs.name.value);
-      formData.append('description', formState.inputs.description.value);
-      formData.append('barcode', formState.inputs.barcode.value);
-      formData.append('color', formState.inputs.color.value);
-      formData.append('price', formState.inputs.price.value);
-      formData.append('category', formState.inputs.category.value);
+      // const formData = new FormData();
+      // formData.append('name', formState.inputs.name.value);
+      // formData.append('description', formState.inputs.description.value);
+      // formData.append('barcode', formState.inputs.barcode.value);
+      // formData.append('color', formState.inputs.color.value);
+      // formData.append('price', formState.inputs.price.value);
+      // formData.append('category', formState.inputs.category.value);
       await sendRequest('http://localhost:5000/api/product/create', 'POST', JSON.stringify({
         name: formState.inputs.name.value,
         description: formState.inputs.description.value,

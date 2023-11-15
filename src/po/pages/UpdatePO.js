@@ -9,78 +9,125 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { useForm } from '../../shared/hooks/form-hook';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import './ProductForm.css';
+import './POForm.css';
 import {
   VALIDATOR_REQUIRE
 } from '../../shared/util/validators';
 
-const UpdateProduct = () => {
+const UpdatePO = () => {
  
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [loadedProduct, setLoadedProduct] = useState();
-  const pid = useParams().pid;
-  const history = useHistory();
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const [loadedProduct, setLoadedProduct] = useState();
+    const poid = useParams().poid;
+    const history = useHistory();
 
-  const [formState, inputHandler, setFormData] = useForm(
-    {
-      name: {
-        value: '',
-        isValid: false
-      },
-      description: {
-        value: '',
-        isValid: false
-      },
-      color: {
-        value: '',
-        isValid: false
-      },
-      price: {
-        value: '',
-        isValid: false
-      }
-    },
-    false
-  );
+    const [formState, inputHandler, setFormData] = useForm(
+        {
+        products: [{
+            product: {
+                id: {
+                    value: '',
+                    isValid: false
+                },
+                name: {
+                    value: '',
+                    isValid: false
+                },
+                description: {
+                    value: '',
+                    isValid: false
+                },
+                barcode: {
+                    value: '',
+                    isValid: false
+                },
+                color: {
+                    value: '',
+                    isValid: false
+                },
+                price: {
+                    value: '',
+                    isValid: false
+                },
+                category: {
+                    value: '',
+                    isValid: false
+                }
+            },
+            quantity: {
+                value: '',
+                isValid: false
+            }
+        }],
+        total: {
+            value: '',
+            isValid: false},
+        },
+        false
+    );
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/product/${pid}`
+          `http://localhost:5000/api/po/${poid}`
         );
-        setLoadedProduct(responseData.product);
+        setLoadedProduct(responseData.po);
         setFormData(
           {
-            name: {
-              value: responseData.product.name,
-              isValid: true
+            products: [{
+                product: {
+                    id: {
+                        value: '',
+                        isValid: true
+                    },
+                    name: {
+                        value: '',
+                        isValid: true
+                    },
+                    description: {
+                        value: '',
+                        isValid: true
+                    },
+                    barcode: {
+                        value: '',
+                        isValid: true
+                    },
+                    color: {
+                        value: '',
+                        isValid: true
+                    },
+                    price: {
+                        value: '',
+                        isValid: true
+                    },
+                    category: {
+                        value: '',
+                        isValid: true
+                    }
+                },
+                quantity: {
+                    value: '',
+                    isValid: true
+                }
+            }],
+            total: {
+                value: '',
+                isValid: true
             },
-            description: {
-              value: responseData.product.description,
-              isValid: true
             },
-            color: {
-              value: responseData.product.color,
-              isValid: true
-            },
-            price: {
-              value: responseData.product.price,
-              isValid: true
-            }
-          },
-          true
+            true
         );
       } catch (err) {}
     };
     fetchProduct();
-  }, [sendRequest, pid, setFormData]);
+  }, [sendRequest, poid, setFormData]);
 
-  const productUpdateSubmitHandler = async event => {
+  const poUpdateSubmitHandler = async event => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:5000/api/product/${pid}`,
+        `http://localhost:5000/api/po/${poid}`,
         'PATCH',
         JSON.stringify({
           name: formState.inputs.title.value,
@@ -94,7 +141,7 @@ const UpdateProduct = () => {
           'Content-Type': 'application/json',
         }
       );
-      history.push('/product');
+      history.push('/po');
     } catch (err) {}
   };
 
@@ -110,7 +157,7 @@ const UpdateProduct = () => {
     return (
       <div className="center">
         <Card>
-          <h2>Could not find product!</h2>
+          <h2>Could not find purchase order!</h2>
         </Card>
       </div>
     );
@@ -120,7 +167,7 @@ const UpdateProduct = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedProduct && (
-        <form className="product-form" onSubmit={productUpdateSubmitHandler}>
+        <form className="po-form" onSubmit={poUpdateSubmitHandler}>
           <Input
             id="name"
             element="input"
@@ -163,7 +210,7 @@ const UpdateProduct = () => {
             initialValid={true}
           />
           <Button type="submit" disabled= {!formState.isValid} >
-            UPDATE PRODUCT
+            UPDATE
           </Button>
         </form>
       )}
@@ -171,4 +218,4 @@ const UpdateProduct = () => {
   );
 };
 
-export default UpdateProduct;
+export default UpdatePO;
