@@ -9,9 +9,10 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 
 import Products from './product/pages/Products';
 import Categories from './category/pages/Categories';
-//import UpdateProduct from './product/pages/UpdateProduct';
 import AddProduct from './product/pages/AddProduct';
-
+import AddCategory from './category/pages/AddCategory';
+import UpdateProduct from './product/pages/UpdateProduct';
+import UpdateCategory from './category/pages/UpdateCategory';
 
 const App = () => { 
 let routes;
@@ -24,8 +25,17 @@ let routes;
             <Route path="/product" exact>
                 <AddProduct />
             </Route>
+            <Route path="/product/:pid">
+                <UpdateProduct />
+            </Route>
             <Route path="/categories" exact>
                 <Categories />
+            </Route>
+            <Route path="/category" exact>
+                <AddCategory />
+            </Route>
+            <Route path="/category/:cid">
+                <UpdateCategory />
             </Route>
             <Redirect to="/" />
         </Switch>

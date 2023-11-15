@@ -22,6 +22,11 @@ const NavLinks = props => {
           ALL CATEGORIES
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/category" exact>
+          ADD CATEGORY
+        </NavLink>
+      </li>
     </ul>
   );
 };

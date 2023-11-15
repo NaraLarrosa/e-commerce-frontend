@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 
+import { validate } from '../../util/validators';
 import './Input.css';
 
 const inputReducer = (state, action) => {
@@ -7,7 +8,8 @@ const inputReducer = (state, action) => {
     case 'CHANGE':
       return {
         ...state,
-        value: action.val
+        value: action.val,
+        isValid: validate(action.val, action.validators)
       };
     case 'TOUCH': {
       return {
