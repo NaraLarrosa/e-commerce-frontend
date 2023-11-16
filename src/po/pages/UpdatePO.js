@@ -74,7 +74,7 @@ const UpdatePO = () => {
         );
         setLoadedProduct(responseData.po);
         setFormData(
-          {
+            {
             products: [{
                 product: {
                     id: {
@@ -94,7 +94,7 @@ const UpdatePO = () => {
                         isValid: true
                     },
                     color: {
-                        value: '',
+                        value: responseData.product.color,
                         isValid: true
                     },
                     price: {
@@ -102,7 +102,7 @@ const UpdatePO = () => {
                         isValid: true
                     },
                     category: {
-                        value: '',
+                        value: responseData.product.color,
                         isValid: true
                     }
                 },
@@ -114,7 +114,7 @@ const UpdatePO = () => {
             total: {
                 value: '',
                 isValid: true
-            },
+            }
             },
             true
         );
