@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
@@ -19,6 +20,8 @@ const ProductItem = props => {
   const cancelDeleteHandler = () => {
     setShowConfirmModal(false);
   };
+  
+  const history = useHistory();
 
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
@@ -29,6 +32,9 @@ const ProductItem = props => {
         null
       );
       props.onDelete(props.id);
+      
+      history.push('/');
+
     } catch (err) {}
   };
 

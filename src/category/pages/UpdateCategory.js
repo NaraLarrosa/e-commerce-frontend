@@ -6,18 +6,22 @@ import Button from '../../shared/components/FormElements/Button';
 import Card from '../../shared/components/UIElements/Card';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import { useForm } from '../../shared/hooks/form-hook';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './CategoryForm.css';
+import {
+  VALIDATOR_REQUIRE
+} from '../../shared/util/validators';
 
 const UpdateCategory = () => {
  
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [loadedCategory, setLoadedProduct] = useState();
+  const [loadedCategory, setLoadedCategory] = useState();
   const cid = useParams().cid;
   const history = useHistory();
 
-  const [formState, inputHandler, setFormData] = (
+  const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
         value: '',
@@ -28,16 +32,16 @@ const UpdateCategory = () => {
   );
 
   useEffect(() => {
-    const fetchPlace = async () => {
+    const fetchCategory = async () => {
       try {
         const responseData = await sendRequest(
           `http://localhost:5000/api/category/${cid}`
         );
-        setLoadedProduct(responseData.category);
+        setLoadedCategory(responseData.category);
         setFormData(
           {
-            name: {
-              value: responseData.category.name,
+            title: {
+              value: responseData.category.title,
               isValid: true
             }
           },
@@ -45,7 +49,7 @@ const UpdateCategory = () => {
         );
       } catch (err) {}
     };
-    fetchPlace();
+    fetchCategory();
   }, [sendRequest, cid, setFormData]);
 
   const categoryUpdateSubmitHandler = async event => {
@@ -55,13 +59,13 @@ const UpdateCategory = () => {
         `http://localhost:5000/api/category/${cid}`,
         'PATCH',
         JSON.stringify({
-          title: formState.inputs.title.value
+          title: formState.inputs.title.value,
         }),
         {
           'Content-Type': 'application/json',
         }
       );
-      history.push('/category');
+      history.push('/categories');
     } catch (err) {}
   };
 
@@ -77,7 +81,7 @@ const UpdateCategory = () => {
     return (
       <div className="center">
         <Card>
-          <h2>Could not find category!</h2>
+          <h2>Could not find Category!</h2>
         </Card>
       </div>
     );
@@ -93,12 +97,12 @@ const UpdateCategory = () => {
             element="input"
             type="text"
             label="Title"
-            errorText="Please enter a valid title."
+            validators={[VALIDATOR_REQUIRE()]}
             onInput={inputHandler}
-            initialValue={loadedCategory.title}
+            initialValue={loadedCategory.name}
             initialValid={true}
           />
-          <Button type="submit" disabled= {!formState.isValid} >
+          <Button type="submit" >
             UPDATE CATEGORY
           </Button>
         </form>

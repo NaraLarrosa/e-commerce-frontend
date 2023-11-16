@@ -75,9 +75,6 @@ const POItem = props => {
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
-              <Button type="button">
-                ADD TO CART
-              </Button>
           </div>
         </Card>
       </li>

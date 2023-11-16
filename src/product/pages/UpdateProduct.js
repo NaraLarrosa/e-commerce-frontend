@@ -83,18 +83,16 @@ const UpdateProduct = () => {
         `http://localhost:5000/api/product/${pid}`,
         'PATCH',
         JSON.stringify({
-          name: formState.inputs.title.value,
+          name: formState.inputs.name.value,
           description: formState.inputs.description.value,
-          barcode: formState.inputs.barcode.value,
           color: formState.inputs.color.value,
           price: formState.inputs.price.value,
-          category: formState.inputs.price.value
         }),
         {
           'Content-Type': 'application/json',
         }
       );
-      history.push('/product');
+      history.push('/');
     } catch (err) {}
   };
 
@@ -162,7 +160,7 @@ const UpdateProduct = () => {
             initialValue={loadedProduct.price}
             initialValid={true}
           />
-          <Button type="submit" disabled= {!formState.isValid} >
+          <Button type="submit" >
             UPDATE PRODUCT
           </Button>
         </form>
