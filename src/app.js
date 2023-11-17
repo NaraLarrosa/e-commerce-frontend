@@ -13,7 +13,7 @@ import AddProduct from './product/pages/AddProduct';
 import AddCategory from './category/pages/AddCategory';
 import UpdateProduct from './product/pages/UpdateProduct';
 import UpdateCategory from './category/pages/UpdateCategory';
-import AddPO from './po/pages/AddPO';
+import PurchaseOrder from './po/pages/PurchaseOrders';
 
 const App = () => { 
 let routes;
@@ -38,8 +38,8 @@ let routes;
             <Route path="/category/:cid">
                 <UpdateCategory />
             </Route>
-            <Route path="/po/:poid">
-                <AddPO />
+            <Route path="/po">
+                <PurchaseOrder />
             </Route>
             <Redirect to="/" />
         </Switch>

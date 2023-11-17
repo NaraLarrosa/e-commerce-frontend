@@ -38,6 +38,23 @@ const ProductItem = props => {
     } catch (err) {}
   };
 
+  const addCartHandler = async () => {
+    try {
+      await sendRequest(
+        `http://localhost:5000/api/po/add`,
+        'PUT', JSON.stringify({
+          pid: props.id,
+          quantity: 1,
+          poid: '6556cd9f112e990bb5819130'
+        }), {
+          'Content-Type': 'application/json'
+      });
+      
+      history.push('/');
+
+    } catch (err) {}
+  };
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -85,7 +102,7 @@ const ProductItem = props => {
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
-              <Button type="button">
+              <Button className="agregar-carrito" type="button" onClick={addCartHandler}>
                 ADD TO CART
               </Button>
           </div>
