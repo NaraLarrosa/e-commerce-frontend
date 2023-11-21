@@ -29,7 +29,7 @@ const NavLinks = props => {
       </li>
       <li>
         <NavLink to="/po" exact>
-          CART
+          <i className="fas fa-shopping-cart"></i>
         </NavLink>
       </li>
     </ul>
